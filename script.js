@@ -1,3 +1,7 @@
+let firstNum = 0;
+let operator = "";
+let lastNum = 0;
+
 const add = (...args) => {
   return args.reduce((total, current) => total + current, 0);
 };
@@ -14,6 +18,6 @@ const divide = (...args) => {
   return args.reduce((total, current) => total / current);
 };
 
-let firstNum = 0;
-let operator = "";
-let lastNum = 0;
+function operate(operator, num1, num2) {
+  add(num1, num2);
+}
