@@ -1,17 +1,34 @@
-let firstNum = 0;
 let operator = "";
-let lastNum = 0;
+let currentNum = "";
+let previousNum = "";
 
 const currentDisplay = document.querySelector(".current");
+const previousDisplay = document.querySelector(".previous");
+
 const numberButtons = document.querySelectorAll(".number").forEach((el) => {
   el.addEventListener("click", () => {
-    console.log("The numbers work!");
     currentDisplay.innerText += el.innerText;
   });
 });
 
-numberButtons.addEventListener("click", () => {
-  console.log("The numbers work");
+const operatorButtons = document.querySelectorAll(".operator").forEach((el) => {
+  el.addEventListener("click", () => {
+    if (!currentDisplay.innerText) {
+      return;
+    }
+    operator = el.innerText;
+    previousNum = currentDisplay.innerText;
+    currentDisplay.innerText = "";
+    previousDisplay.innerText = `${previousNum} ${operator}`;
+  });
+});
+
+const equalButton = document.querySelector(".equal");
+equalButton.addEventListener("click", () => {
+  currentNum = currentDisplay.innerText;
+  currentDisplay.innerText = operate(operator, parseInt(previousNum), parseInt(currentNum));
+  previousDisplay.innerText = "";
+  previousNum = "";
 });
 
 const add = (...args) => {
@@ -31,5 +48,17 @@ const divide = (...args) => {
 };
 
 function operate(operator, num1, num2) {
-  add(num1, num2);
+  console.log(operator, num1, num2);
+  switch (operator) {
+    case "÷":
+      return divide(num1, num2);
+    case "×":
+      return multiply(num1, num2);
+    case "−":
+      return subtract(num1, num2);
+    case "+":
+      return add(num1, num2);
+    default:
+      return "You broke it";
+  }
 }
