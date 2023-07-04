@@ -7,6 +7,11 @@ const previousDisplay = document.querySelector(".previous");
 
 const numberButtons = document.querySelectorAll(".number").forEach((el) => {
   el.addEventListener("click", () => {
+    if (el.innerText == "." && currentDisplay.innerText.includes(".")) {
+      return;
+    } else if (currentDisplay.innerText.length == 11) {
+      return;
+    }
     currentDisplay.innerText += el.innerText;
   });
 });
@@ -73,6 +78,13 @@ const divide = (...args) => {
 };
 
 function operate(operator, num1, num2) {
+  // Special easter egg
+  if (operator == "+" && num1 == 9 && num2 == 10) {
+    return 21 + "(You stupid)";
+  } else if (operator == "÷" && num2 == 0) {
+    return "You stupid!";
+  }
+
   switch (operator) {
     case "÷":
       return divide(num1, num2);

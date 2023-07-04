@@ -5,6 +5,7 @@ body {
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(to right, rgb(0, 128, 111), rgb(47, 11, 250), rgb(70, 0, 128));
 }
 
 .btn {
@@ -55,7 +56,7 @@ body {
 }
 
 .display {
-  width: 215px;
+  width: 214px;
   height: 65px;
   background-color: rgb(31, 196, 168);
   border-radius: 15px;
@@ -65,18 +66,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0px;
 }
 
 .current {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: right;
   padding-right: 10px;
+  max-width: 214px;
 }
 
 .previous {
   padding: 10px 10px 0px 0px;
   text-align: right;
   min-height: 1rem;
+  max-width: 214px;
 }
 
 button {
@@ -88,8 +92,14 @@ button {
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.877);
   border: none;
+  min-width: 300px;
 }
 
 button {
   cursor: pointer;
+}
+
+h1 {
+  color: wheat;
+  font-family: Arial, Helvetica, sans-serif;
 }
