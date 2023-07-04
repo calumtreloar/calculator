@@ -2,7 +2,6 @@ let operator = "";
 let currentNum = "";
 let previousNum = "";
 
-// 12 + 7 - 5 * 3 =
 const currentDisplay = document.querySelector(".current");
 const previousDisplay = document.querySelector(".previous");
 
@@ -28,25 +27,29 @@ const operatorButtons = document.querySelectorAll(".operator").forEach((el) => {
     }
     if (operator) {
       currentNum = currentDisplay.innerText;
-      previousNum = operate(operator, parseInt(previousNum), parseInt(currentNum));
+      previousNum = operate(operator, parseFloat(previousNum), parseFloat(currentNum));
+      previousNum = Math.round(previousNum * 10000) / 10000;
       previousDisplay.innerText = previousNum;
       currentNum = "";
-      operator = el.innerText;
-      previousDisplay.innerText = `${previousNum} ${operator}`;
-      currentDisplay.innerText = "";
+      updateDisplay(el);
       return;
     }
     previousNum = currentDisplay.innerText;
-    operator = el.innerText;
-    currentDisplay.innerText = "";
-    previousDisplay.innerText = `${previousNum} ${operator}`;
+    updateDisplay(el);
   });
 });
+
+function updateDisplay(el) {
+  operator = el.innerText;
+  currentDisplay.innerText = "";
+  previousDisplay.innerText = `${previousNum} ${operator}`;
+}
 
 const equalButton = document.querySelector(".equal");
 equalButton.addEventListener("click", () => {
   currentNum = currentDisplay.innerText;
-  currentDisplay.innerText = operate(operator, parseInt(previousNum), parseInt(currentNum));
+  currentDisplay.innerText = operate(operator, parseFloat(previousNum), parseFloat(currentNum));
+  currentNum = Math.round(currentNum * 10000) / 10000;
   previousDisplay.innerText = "";
   previousNum = "";
 });
@@ -68,7 +71,6 @@ const divide = (...args) => {
 };
 
 function operate(operator, num1, num2) {
-  console.log(operator, num1, num2);
   switch (operator) {
     case "÷":
       return divide(num1, num2);
