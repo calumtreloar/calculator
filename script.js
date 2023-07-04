@@ -2,6 +2,7 @@ let operator = "";
 let currentNum = "";
 let previousNum = "";
 
+// 12 + 7 - 5 * 3 =
 const currentDisplay = document.querySelector(".current");
 const previousDisplay = document.querySelector(".previous");
 
@@ -11,13 +12,32 @@ const numberButtons = document.querySelectorAll(".number").forEach((el) => {
   });
 });
 
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", () => {
+  currentNum = "";
+  previousNum = "";
+  currentDisplay.innerText = "";
+  previousDisplay.innerText = "";
+  operator = "";
+});
+
 const operatorButtons = document.querySelectorAll(".operator").forEach((el) => {
   el.addEventListener("click", () => {
     if (!currentDisplay.innerText) {
       return;
     }
-    operator = el.innerText;
+    if (operator) {
+      currentNum = currentDisplay.innerText;
+      previousNum = operate(operator, parseInt(previousNum), parseInt(currentNum));
+      previousDisplay.innerText = previousNum;
+      currentNum = "";
+      operator = el.innerText;
+      previousDisplay.innerText = `${previousNum} ${operator}`;
+      currentDisplay.innerText = "";
+      return;
+    }
     previousNum = currentDisplay.innerText;
+    operator = el.innerText;
     currentDisplay.innerText = "";
     previousDisplay.innerText = `${previousNum} ${operator}`;
   });
