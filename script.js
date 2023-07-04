@@ -47,11 +47,13 @@ function updateDisplay(el) {
 
 const equalButton = document.querySelector(".equal");
 equalButton.addEventListener("click", () => {
-  currentNum = currentDisplay.innerText;
-  currentDisplay.innerText = operate(operator, parseFloat(previousNum), parseFloat(currentNum));
-  currentNum = Math.round(currentNum * 10000) / 10000;
-  previousDisplay.innerText = "";
-  previousNum = "";
+  if (currentDisplay.innerText && previousNum) {
+    currentNum = currentDisplay.innerText;
+    currentDisplay.innerText = operate(operator, parseFloat(previousNum), parseFloat(currentNum));
+    currentNum = Math.round(currentNum * 10000) / 10000;
+    previousDisplay.innerText = "";
+    previousNum = "";
+  }
 });
 
 const add = (...args) => {
